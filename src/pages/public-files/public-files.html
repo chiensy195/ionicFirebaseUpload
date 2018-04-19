@@ -1,0 +1,37 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+      <ion-buttons left>
+        <button ion-button icon-only (click)="logout()">
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Public Files</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+
+
+<ion-content>
+
+<progress-bar [progress]="loadProgress" *ngIf="loadProgress != 0 && loadProgress != 100"></progress-bar>
+
+  <ion-card *ngFor="let image of images | async">
+    <ion-card-header>
+      {{ image.created | date:'medium' }}
+    </ion-card-header>
+
+    <ion-card-content>
+      <img [src]="image.url">
+    </ion-card-content>
+    <button ion-button full clear icon-left color="danger" (click)="deleteFile(image)">
+      <ion-icon name="trash"></ion-icon> Delete
+    </button>
+  </ion-card>
+
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="captureAndUpload()">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
